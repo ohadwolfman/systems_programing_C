@@ -28,7 +28,8 @@ loops: libclassloops.a
 libclassloops.a: $(BASIC).o $(ACL).o
 	ar -rcu libclassloops.a $^
 
-recursives: $(BASIC).o $(ACR).o
+recursives: libclassrec.a
+libclassrec.a: $(BASIC).o $(ACR).o
 	ar -rc libclassrec.a $^
 	
 recursived: $(BASIC).o $(ACR).o
