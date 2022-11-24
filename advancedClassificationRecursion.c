@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include "NumClass.h"
 
 // Check the number of digits in a given integer
 int countDigits(int n){

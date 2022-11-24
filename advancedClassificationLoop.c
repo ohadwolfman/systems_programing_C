@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#include "advancedClassificationLoop.h"
+#include "NumClass.h"
 
 // check if a number is an Armstrong number, using loops
 int isArmstorng(int n){

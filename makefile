@@ -5,24 +5,23 @@ CFLAGS = -Wall -g
 BASIC =  basicClassification
 ACL = advancedClassificationLoop
 ACR = advancedClassificationRecursion
+NC = NumClass
 
 
 all: loops recursives loopd recursived mains maindloop maindrec
 
 
-
-basicClassification.o: $(BASIC).c $(BASIC).h
+basicClassification.o: $(BASIC).c $(NC).h
 	$(CC) $(CFLAGS) -c $<
 
-advancedClassificationLoop.o: $(ACL).c $(ACL).h
+advancedClassificationLoop.o: $(ACL).c $(NC).h
 	$(CC) $(CFLAGS) -c $<
 
-advancedClassificationRecursion.o: $(ACR).c $(ACR).h
+advancedClassificationRecursion.o: $(ACR).c $(NC).h
 	$(CC) $(CFLAGS) -c $<
 
-main.o: main.c $(BASIC).h $(ACL).h $(ACR).h
+main.o: main.c $(NC).h
 	$(CC) $(CFLAGS) -c $<
-
 
 
 
@@ -39,13 +38,13 @@ loopd: $(BASIC).o $(ACL).o
 	$(CC) $(CFLAGS) -fPIC -shared -o libclassloops.so $^
 	
 mains: main.o libclassrec.a
-	$(CC) $(CFLAGS) main.o -L. -lclassrec -o mains -lm
+	$(CC) $(CFLAGS) -o mains main.o -L. -lclassrec -lm
 	
 maindloop: main.o libclassloops.so
-	$(CC) $(CFLAGS) main.c -L. -lclassloops -o maindloop -lm
+	$(CC) $(CFLAGS) -o maindloop main.o -L. -lclassloops -lm
 	
 maindrec: main.o libclassrec.so
-	$(CC) $(CFLAGS) main.c -L. -lclassrec -o maindrec -lm
+	$(CC) $(CFLAGS) -o maindrec main.o -L. -lclassrec -lm
 	
 clean:
 	rm -f *.o *.so *.a mains maindloop maindrec

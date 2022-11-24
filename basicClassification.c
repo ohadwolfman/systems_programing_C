@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#include "basicClassification.h"
+#include "NumClass.h"
 
 // check if given number is a prime number
 int isPrime(int n) {
