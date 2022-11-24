@@ -24,8 +24,8 @@ main.o: main.c $(NC).h
 	$(CC) $(CFLAGS) -c $<
 
 
-
-loops: $(BASIC).o $(ACL).o
+loops: libclassloops.a
+libclassloops.a: $(BASIC).o $(ACL).o
 	ar -rcu libclassloops.a $^
 
 recursives: $(BASIC).o $(ACR).o
@@ -33,8 +33,9 @@ recursives: $(BASIC).o $(ACR).o
 	
 recursived: $(BASIC).o $(ACR).o
 	$(CC) $(CFLAGS) -fPIC -shared -o libclassrec.so $^
-	
-loopd: $(BASIC).o $(ACL).o
+
+loopd:libclassloops.so	
+libclassloops.so: $(BASIC).o $(ACL).o
 	$(CC) $(CFLAGS) -fPIC -shared -o libclassloops.so $^
 	
 mains: main.o libclassrec.a
