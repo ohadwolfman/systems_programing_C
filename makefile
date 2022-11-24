@@ -26,7 +26,7 @@ main.o: main.c $(NC).h
 
 
 loops: $(BASIC).o $(ACL).o
-	ar -rc libclassloops.a $^
+	ar -rcu libclassloops.a $^
 
 recursives: $(BASIC).o $(ACR).o
 	ar -rc libclassrec.a $^
@@ -42,11 +42,11 @@ mains: main.o libclassrec.a
 	
 maindloop: main.o libclassloops.so
 	$(CC) $(CFLAGS) -o maindloop main.o -L. -lclassloops -lm
-	export LD_LIBRARY_PATH=.
+	export LD_LIBRARY_PATH=.:$$LD_LIBRARY_PATH
 	
 maindrec: main.o libclassrec.so
 	$(CC) $(CFLAGS) -o maindrec main.o -L. -lclassrec -lm
-	export LD_LIBRARY_PATH=.
+	export LD_LIBRARY_PATH=.:$$LD_LIBRARY_PATH
 	
 clean:
 	rm -f *.o *.so *.a mains maindloop maindrec
