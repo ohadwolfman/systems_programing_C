@@ -40,14 +40,14 @@ libclassloops.so: $(BASIC).o $(ACL).o
 	$(CC) $(CFLAGS) -fPIC -shared -o libclassloops.so $^
 	
 mains: main.o libclassrec.a
-	$(CC) $(CFLAGS) -o mains main.o -L. -lclassrec -lm
+	$(CC) $(CFLAGS) -o mains main.o -L. -libclassloops -lm
 	
 maindloop: main.o libclassloops.so
-	$(CC) $(CFLAGS) -o maindloop main.o -L. -lclassloops -lm
+	$(CC) $(CFLAGS) -o maindloop main.o -L. -libclassloops -lm
 	export LD_LIBRARY_PATH=.:$$LD_LIBRARY_PATH
 	
 maindrec: main.o libclassrec.so
-	$(CC) $(CFLAGS) -o maindrec main.o -L. -lclassrec -lm
+	$(CC) $(CFLAGS) -o maindrec main.o -L. -libclassloops -lm
 	export LD_LIBRARY_PATH=.:$$LD_LIBRARY_PATH
 	
 clean:
